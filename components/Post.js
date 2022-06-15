@@ -18,10 +18,12 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  addDoc
 } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { lazy, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
+import { useDoubleTap } from 'use-double-tap';
 import { db } from "../firebase";
 import Comment from "./Comment";
 
@@ -62,6 +64,7 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
     [likes]
   );
 
+
   const likePost = async () => {
     if (hasLikes) {
       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
@@ -86,6 +89,10 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
       timestamp: serverTimestamp(),
     });
   };
+
+  const doubleTap = useDoubleTap(() => {
+    likePost();
+  });
   return (
     <div className="md:border-2 rounded-none md:rounded-3xl shadow-md md:shadow-lg py-4 px-6">
       <div className="flex justify-between">
@@ -103,11 +110,10 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
         <DotsVerticalIcon className="w-8 h-8" />
       </div>
       <div className="flex flex-col  rounded-3xl w-full h-full mt-8 pb-4 bg-cover">
-        <div className="relative">
+        <div className="relative" onDoubleClick={likePost} {...doubleTap} >
           <img
             src={image}
             className="rounded-3xl shadow-2xl"
-            loading={lazy}
             alt=""
           />
           <div className={` flex absolute bottom-[10%]  justify-center transform transition-all duration-200  w-full ${hasContent ? 'opacity-100' : 'opacity-0'}`}>
