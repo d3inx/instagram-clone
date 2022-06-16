@@ -6,7 +6,7 @@ import Modal from "../components/Modal";
 
 export default function Home() {
   return (
-    <>
+    <div className='mb-[60px]'>
       <Head>
         <title>Instagram Clone</title>
         <meta name="description" content="Instagram 2.0" />
@@ -17,6 +17,6 @@ export default function Home() {
 
       <Modal />
       
-    </>
+    </div>
   );
 }
