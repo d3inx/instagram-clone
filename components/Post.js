@@ -115,7 +115,7 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
         <DotsVerticalIcon className="w-8 h-8" />
       </div>
       <div className="flex flex-col  rounded-3xl w-full h-full mt-8 pb-4 bg-cover">
-        <div className="relative" onDoubleClick={likePost} {...doubleTap} >
+        <div className="relative animate-pulse bg-slate-300" onDoubleClick={likePost} {...doubleTap} >
           <LazyLoadImage
             src={image}
             effect="blur"
