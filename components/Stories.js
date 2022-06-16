@@ -20,8 +20,8 @@ const Stories = () => {
       <div
           className="flex flex-col items-center justify-between py-2 hover:scale-125 transform duration-200 w-20"
         >
-            <div className="relative inline-block min-w-max">
-                <img src={session.user.image} className='rounded-3xl w-16 h-16' alt='' />
+            <div className="relative inline-block w-16 h-16">
+                <Image src={session.user.image} className='rounded-3xl' layout="fill" alt='' />
                 <PlusIcon className="absolute bottom-0 right-0 inline-block w-6 h-6 bg-blue-500 text-white border-2 border-white rounded-full p-[2px]" />
             </div>
             <div className="w-full truncate text-xs mt-2 text-center">{session?.user?.username}</div>

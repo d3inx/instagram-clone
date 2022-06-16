@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const MiniProfile = () => {
@@ -16,10 +17,11 @@ const MiniProfile = () => {
   return (
     <div className="pl-8">
       <div className="flex justify-between">
-        <div>
-          <img
+        <div className="relative w-16 h-16">
+          <Image
             src={session?.user?.image}
-            className="w-16 h-16 rounded-3xl"
+            className=" rounded-3xl"
+            layout="fill"
             alt=""
           />
         </div>
@@ -33,17 +35,18 @@ const MiniProfile = () => {
       <div className="space-y-4">
         {suggestions.map((suggestion) => (
           <>
-            <div key={suggestion.id} className="flex space-x-8">
-              <div>
-                <img
+            <div key={suggestion.id} className="flex  w-12 h-12 space-x-8">
+              <div className="relative min-w-full min-h-full">
+                <Image
                   src={suggestion?.profile}
-                  className="w-12 h-12 rounded-full"
+                  className=" rounded-full"
+                  layout="fill"
                   alt=""
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <div className="font-bold">{suggestion.username}</div>
-                <div className="text-neutral-500">Suggested For You</div>
+                <div className="font-bold truncate">{suggestion.username}</div>
+                <div className="text-neutral-500 truncate">Suggested For You</div>
               </div>
               <button className=" text-blue-500">
                 Follow

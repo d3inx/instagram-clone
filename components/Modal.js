@@ -7,6 +7,8 @@ import { modalState } from "../atoms/modalState";
 import { addDoc , collection , serverTimestamp , updateDoc , doc } from "@firebase/firestore";
 import { db , storage} from "../firebase";
 import { getDownloadURL, ref, uploadString } from "firebase/storage"; 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function Modal() {
   const [open, setOpen] = useRecoilState(modalState);
@@ -92,7 +94,7 @@ export default function Modal() {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className=" flex my-4  justify-center">
                     {selectedFile ? (
-                      <img src={selectedFile} onClick={() => setSelectedFile(null)} className="w-full" alt="" />
+                      <LazyLoadImage effect="blur" src={selectedFile} onClick={() => setSelectedFile(null)} className="w-full" alt="" />
                     ) : (
                       <CameraIcon
                         onClick={() => filePickerRef.current.click()}

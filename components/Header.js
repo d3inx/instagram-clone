@@ -9,6 +9,7 @@ import {
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalState";
+import Router from "next/router";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -16,10 +17,11 @@ const Header = () => {
   return (
     <div className="md:border-b-2 py-2">
       <div className="container  mx-auto px-4 md:px-20 flex justify-between items-center">
-        <div className="relative  w-1/3 md:w-28 h-10">
+        <div className="relative  w-1/3 md:w-28 h-10 ">
           <Image
+            onClick={() => Router.push({ pathname: "/" })}
             src="https://www.vectorlogo.zone/logos/instagram/instagram-wordmark.svg"
-            className="object-cover"
+            className="object-cover cursor-pointer"
             alt="instagram logo"
             layout="fill"
           />
@@ -46,10 +48,9 @@ const Header = () => {
                 onClick={signOut}
                 className="relative w-7 h-7 cursor-pointer hover:scale-125 transform duration-200"
               >
-                <img
+                <Image
                   src={session?.user?.image}
-                  loading="lazy"
-                  className="rounded-full "
+                  className="rounded-full"
                   alt=""
                   layout="fill"
                 />

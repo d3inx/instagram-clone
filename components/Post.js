@@ -24,6 +24,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import {  useEffect, useState } from "react";
 import { useDoubleTap } from 'use-double-tap';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { db } from "../firebase";
 import Comment from "./Comment";
 
@@ -93,6 +95,9 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
   const doubleTap = useDoubleTap(() => {
     likePost();
   });
+
+
+  
   return (
     <div className="md:border-2 rounded-none md:rounded-3xl shadow-md md:shadow-lg py-4 px-6">
       <div className="flex justify-between">
@@ -111,8 +116,9 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
       </div>
       <div className="flex flex-col  rounded-3xl w-full h-full mt-8 pb-4 bg-cover">
         <div className="relative" onDoubleClick={likePost} {...doubleTap} >
-          <img
+          <LazyLoadImage
             src={image}
+            effect="blur"
             className="rounded-3xl shadow-2xl"
             alt=""
           />
@@ -154,7 +160,7 @@ const Post = ({ id, profile, username, image, caption, timestamp }) => {
         <div className="">
           <span className="font-bold">{username}</span> {caption}
         </div>
-        <div className="max-h-28 my-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent pr-6">
+        <div className="max-h-28 my-2 overflow-y-scroll scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent md:pr-6">
           {comments.map((comment) => (
             <Comment
               key={comment.data().id}

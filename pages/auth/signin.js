@@ -1,4 +1,5 @@
 import { getProviders, signIn } from "next-auth/react";
+import Image from "next/image";
 import Header from "../../components/Header";
 
 export async function getServerSideProps(context) {
@@ -11,22 +12,20 @@ export async function getServerSideProps(context) {
 export default function SignIn({ providers }) {
   return (
     <>
-      <Header />
       {Object.values(providers).map((provider) => (
         <div
           className="flex flex-col mt-24  items-center justify-center w-full"
           key={provider.name}
         >
-          <div>
-            <img
+          <div className="relative w-96 h-48">
+            <Image
               src="https://www.vectorlogo.zone/logos/instagram/instagram-ar21.svg"
-              className="w-96 h-48"
-              loading="lazy"
+              layout="fill"
               alt=""
             />
           </div>
 
-          <div className="text-xl break-words my-4">
+          <div className="text-xl break-words my-4 text-center">
             This is not a REAL app,it is a built for educational purposes only
           </div>
           <button

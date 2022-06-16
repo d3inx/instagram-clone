@@ -18,7 +18,7 @@ const Feed = () => {
             <Stories />
             <Posts />
           </div>
-          <div className="hidden lg:inline-block lg:w-3/12">
+          <div className="hidden lg:inline-block lg:w-4/12">
             <MiniProfile />
           </div>
         </>
